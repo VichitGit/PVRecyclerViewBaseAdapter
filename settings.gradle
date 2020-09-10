@@ -1,0 +1,3 @@
+include ':PVRecyclerView-Adapter-Helper'
+include ':app'
+rootProject.name = "AppExample"
