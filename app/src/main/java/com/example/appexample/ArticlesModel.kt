@@ -11,7 +11,6 @@ class ArticlesModel(
     override fun toString(): String {
         return "ArticlesModel(title='$title', description='$description')"
     }
-
 }
 
 class AdsModel(var url: String) : BaseModel() {
@@ -40,7 +39,5 @@ class LoadingModel : BaseModel() {
 
 abstract class BaseModel {
     abstract fun getLayoutType(): Int
-
-
 }
 

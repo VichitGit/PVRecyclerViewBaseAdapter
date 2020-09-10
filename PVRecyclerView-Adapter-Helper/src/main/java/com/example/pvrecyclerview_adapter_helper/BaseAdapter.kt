@@ -3,7 +3,6 @@ package com.example.pvrecyclerview_adapter_helper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -23,7 +22,8 @@ abstract class BaseAdapter<T : BaseModel>(
             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     //Get position items in LayoutManager
-                    val lastVisibleItem = linearLayoutManager?.findLastCompletelyVisibleItemPosition()
+                    val lastVisibleItem =
+                        linearLayoutManager?.findLastCompletelyVisibleItemPosition()
                     totalPage = onHandlePagination?.getTotalPage()!!
 
                     if (!isLoading && currentPage < totalPage && lastVisibleItem == items.size - 3) {
@@ -38,7 +38,6 @@ abstract class BaseAdapter<T : BaseModel>(
     }
 
     fun setItems(items: Collection<T>?) {
-        //Log.e("pppp", "setItems") //1
         if (this.items === items) return
         with(this.items) {
             //clear()
@@ -58,7 +57,6 @@ abstract class BaseAdapter<T : BaseModel>(
                 removeProgressbar()
         }
     }
-
 
     fun setRefresh() {
         totalPage = 1
@@ -89,24 +87,20 @@ abstract class BaseAdapter<T : BaseModel>(
     abstract fun getProgressbar(): MutableList<T>
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): BaseViewHolder<T> {
-        //Log.e("pppp", "onCreateViewHolder") //4
         val view = LayoutInflater.from(viewGroup.context).inflate(viewType, viewGroup, false)
         return getViewHolder(viewType, view)
     }
 
     override fun onBindViewHolder(viewHolder: BaseViewHolder<T>, position: Int) {
-        //Log.e("pppp", "onBindViewHolder") //6
         return viewHolder.bindItem(items[position])
     }
 
     override fun getItemViewType(position: Int): Int {
-        //Log.e("pppp", "getItemViewType") //3
         //return items[position].getLayoutType()
         return setItemViewType(position, items)
     }
 
     override fun getItemCount(): Int {
-        //Log.e("pppp", "getItemCount") //2
         return items.size
     }
 }
@@ -115,8 +109,5 @@ abstract class BaseViewHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemV
     abstract fun bindItem(item: T)
 }
 
-enum class Result {
-    SUCCESS,
-    FAILED
-}
+
 
